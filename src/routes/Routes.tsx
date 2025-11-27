@@ -15,7 +15,7 @@ const rootRoute = createRootRoute({
 
 const noteRoute = createRoute({
     getParentRoute: () => rootRoute,
-    path: '/notes',
+    path: '/',
     component: Note,
 })
 
