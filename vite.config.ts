@@ -18,7 +18,6 @@ export default defineConfig({
     }),
     VitePWA({
       registerType: 'autoUpdate',
-      devOptions: { enabled: true },  // biar bisa test lokal
       manifest: {
         name: 'Apptama',
         short_name: 'Apptama',
@@ -28,15 +27,16 @@ export default defineConfig({
         background_color: '#ffffff',
         icons: [
           {
-            src: '/icons/icon-192x192.png',
+            src: '/assets/pwa/pwa-192x192.png',   // ← path tetap meski di-hash
             sizes: '192x192',
-            type: 'image/png',
+            type: 'image/png'
           },
           {
-            src: '/icons/icon-512x512.png',
+            src: '/assets/pwa/pwa-512x512.png',
             sizes: '512x512',
             type: 'image/png',
-          },
+            purpose: 'any maskable'
+          }
         ],
       },
     }),
