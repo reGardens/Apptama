@@ -16,8 +16,10 @@ function Auth() {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (username === 'ritakarina' && password === '021096' || username === 'rezabaguspratama' && password === '030597') {
+            window.toast('Login berhasil! Selamat datang 👋', 'success')
             router.navigate({ to: '/note', replace: true })
         } else {
+            window.toast('Login gagal! Coba lagi', 'error')
             console.log('Login failed');
         }
     }
