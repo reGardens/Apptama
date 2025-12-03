@@ -1,4 +1,3 @@
-// src/App.tsx  ← file baru!
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { routeTree } from './routeTree.gen'
 import { useRegisterSW } from '@/hooks/useRegisterSW'
