@@ -1,4 +1,3 @@
-// src/routes/__root.tsx
 import { createRootRoute, redirect, Outlet } from '@tanstack/react-router'
 
 export const Route = createRootRoute({

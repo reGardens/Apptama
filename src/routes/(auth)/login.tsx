@@ -1,9 +1,9 @@
 import { createFileRoute, useRouter } from '@tanstack/react-router'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { LuEyeClosed } from "react-icons/lu";
 import { LuEye } from "react-icons/lu";
 
-export const Route = createFileRoute('/login')({
+export const Route = createFileRoute('/(auth)/login')({
     component: Auth,
 })
 
@@ -13,25 +13,12 @@ function Auth() {
     const [password, setPassword] = useState<string>('');
     const [showPassword, setShowPassword] = useState<boolean>(false);
 
-    // useEffect(() => {
-    //     const authData = sessionStorage.getItem('auth')
-    //     if (authData) {
-    //         window.showToast?.('Selamat datang kembali!', 'success')
-    //         router.navigate({ to: '/note', replace: true })
-    //     } else {
-    //         router.navigate({ to: '/login', replace: true })
-    //     }
-    // }, [router])
-
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (username === 'ritakarina' && password === '021096' || username === 'rezabaguspratama' && password === '030597' || username === 'r' && password === '1') {
             window.showToast('Login berhasil! Selamat datang', 'success')
             router.navigate({ to: '/note', replace: true })
             sessionStorage.setItem('auth', JSON.stringify({ username, password }))
-            const redirectTo = sessionStorage.getItem('redirectAfterLogin') || '/note'
-            sessionStorage.removeItem('redirectAfterLogin')
-            router.navigate({ to: redirectTo, replace: true })
         } else {
             window.showToast('Login gagal! Coba lagi', 'error')
         }
