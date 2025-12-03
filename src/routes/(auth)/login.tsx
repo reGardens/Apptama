@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 import packageJson from '../../../package.json'
-=======
 import { useAuthStore } from '@/stores/useAuthStore';
->>>>>>> 0b363940a798927cd39df8c6f20680fb54041a55
 import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useState } from 'react';
 import { LuEyeClosed } from "react-icons/lu";
