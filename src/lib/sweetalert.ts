@@ -8,8 +8,8 @@ const MySwal = withReactContent(Swal)
 declare global {
     interface Window {
         showToast: (message: string, icon?: SweetAlertIcon) => void
-        showAlert: (title: string, text?: string, icon?: SweetAlertIcon) => Promise<SweetAlertResult<any>>
-        showConfirm: (title: string, text?: string) => Promise<SweetAlertResult<any>>
+        showAlert: (title: string, text?: string, icon?: SweetAlertIcon) => Promise<SweetAlertResult<SweetAlertIcon>>
+        showConfirm: (title: string, text?: string) => Promise<SweetAlertResult<SweetAlertIcon>>
     }
 }
 
@@ -36,7 +36,7 @@ window.showToast = (message: string, icon: 'success' | 'error' | 'warning' | 'in
 }
 
 // Standard alert (center screen)
-window.showAlert = (title: string, text?: string, icon?: any) => {
+window.showAlert = (title: string, text?: string, icon?: SweetAlertIcon) => {
     return MySwal.fire({
         icon,
         title,

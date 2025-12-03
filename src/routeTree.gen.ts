@@ -11,7 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as NoteRouteImport } from './routes/note'
 import { Route as AuthRouteImport } from './routes/auth'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as IndexRouteImport } from './routes/auth/index'
 
 const NoteRoute = NoteRouteImport.update({
   id: '/note',
