@@ -1,4 +1,5 @@
 import Swal from 'sweetalert2'
+import type { SweetAlertIcon, SweetAlertResult } from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
 const MySwal = withReactContent(Swal)
@@ -6,14 +7,14 @@ const MySwal = withReactContent(Swal)
 // Expose ke window supaya bisa dipanggil dari mana saja
 declare global {
     interface Window {
-        toast: typeof MySwal.fire
-        alert: typeof MySwal.fire
-        confirm: typeof MySwal.fire
+        showToast: (message: string, icon?: SweetAlertIcon) => void
+        showAlert: (title: string, text?: string, icon?: SweetAlertIcon) => Promise<SweetAlertResult<any>>
+        showConfirm: (title: string, text?: string) => Promise<SweetAlertResult<any>>
     }
 }
 
 // Toast mode (small, in the corner, auto close)
-window.toast = (message: string, icon: 'success' | 'error' | 'warning' | 'info' | 'question' = 'info') => {
+window.showToast = (message: string, icon: 'success' | 'error' | 'warning' | 'info' | 'question' = 'info') => {
     MySwal.fire({
         toast: true,
         position: 'top-end',
@@ -35,7 +36,7 @@ window.toast = (message: string, icon: 'success' | 'error' | 'warning' | 'info' 
 }
 
 // Standard alert (center screen)
-window.alert = (title: string, text?: string, icon?: any) => {
+window.showAlert = (title: string, text?: string, icon?: any) => {
     return MySwal.fire({
         icon,
         title,
@@ -50,7 +51,7 @@ window.alert = (title: string, text?: string, icon?: any) => {
 }
 
 // Confirm dialog
-window.confirm = (title: string, text?: string) => {
+window.showConfirm = (title: string, text?: string) => {
     return MySwal.fire({
         title,
         text,
