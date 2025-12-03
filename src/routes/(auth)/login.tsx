@@ -1,3 +1,4 @@
+import { useAuthStore } from '@/stores/useAuthStore';
 import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useState } from 'react';
 import { LuEyeClosed } from "react-icons/lu";
@@ -9,18 +10,28 @@ export const Route = createFileRoute('/(auth)/login')({
 
 function Auth() {
     const router = useRouter()
-    const [username, setUsername] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
+    const { username, password, setUsername, setPassword, login } = useAuthStore()
     const [showPassword, setShowPassword] = useState<boolean>(false);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        if (username === 'ritakarina' && password === '021096' || username === 'rezabaguspratama' && password === '030597' || username === 'r' && password === '1') {
-            window.showToast('Login berhasil! Selamat datang', 'success')
-            router.navigate({ to: '/note', replace: true })
-            sessionStorage.setItem('auth', JSON.stringify({ username, password }))
+
+        const validUsers = [
+            { u: 'ritakarina', p: '021096' },
+            { u: 'rezabaguspratama', p: '030597' },
+            { u: 'r', p: '1' },
+        ];
+
+        const isValid = validUsers.some(
+            (user) => user.u === username && user.p === password
+        );
+
+        if (isValid) {
+            login(username, password); // simpan ke Zustand + localStorage otomatis
+            window.showToast('Login berhasil! Selamat datang', 'success');
+            router.navigate({ to: '/note', replace: true });
         } else {
-            window.showToast('Login gagal! Coba lagi', 'error')
+            window.showToast('Login gagal! Coba lagi', 'error');
         }
     }
 
