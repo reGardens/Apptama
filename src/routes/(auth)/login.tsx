@@ -1,3 +1,4 @@
+import packageJson from '../../../package.json'
 import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useState } from 'react';
 import { LuEyeClosed } from "react-icons/lu";
@@ -107,6 +108,7 @@ function Auth() {
                             </div> */}
                         </div>
                     </div>
+                    <div className="text-center text-xs">v{packageJson.version}</div>
                 </div>
             </div>
         </div>
