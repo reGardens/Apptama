@@ -1,7 +1,6 @@
 import packageJson from '../../../package.json'
 import { useAuthStore } from '@/stores/useAuthStore';
 import { createFileRoute, useRouter } from '@tanstack/react-router'
-import { useState } from 'react';
 import { LuEyeClosed } from "react-icons/lu";
 import { LuEye } from "react-icons/lu";
 
@@ -11,8 +10,7 @@ export const Route = createFileRoute('/(auth)/login')({
 
 function Auth() {
     const router = useRouter()
-    const { username, password, setUsername, setPassword, login } = useAuthStore()
-    const [showPassword, setShowPassword] = useState<boolean>(false);
+    const { username, password, showPassword, setUsername, setPassword, setShowPassword, login } = useAuthStore()
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -48,7 +46,7 @@ function Auth() {
                                 </div>
                                 Log in
                             </h1>
-                            <form action="#" method="post" className="space-y-4">
+                            <form onSubmit={handleSubmit} className="space-y-4">
                                 <div>
                                     <label htmlFor="username" className="mb-2  dark:text-gray-400 text-lg">Username</label>
                                     <input id="username" className="border p-3 dark:bg-gray-800 dark:text-gray-300  dark:border-gray-700 shadow-md placeholder:text-base focus:scale-105 ease-in-out duration-300 border-gray-300 rounded-lg w-full" type="text" placeholder="Username" required onChange={(e) => setUsername(e.target.value)} autoComplete='off' />
@@ -57,7 +55,7 @@ function Auth() {
                                     <label htmlFor="password" className="mb-2 dark:text-gray-400 text-lg">Password</label>
                                     <div className="relative">
                                         <input id="password" className="border p-3 shadow-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700 placeholder:text-base focus:scale-105 ease-in-out duration-300 border-gray-300 rounded-lg w-full" type={showPassword ? "text" : "password"} placeholder="Password" required onChange={(e) => setPassword(e.target.value)} autoComplete='off' />
-                                        <button className='absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer opacity-75 bg-gray-600 rounded-lg p-1.5 outline-none' onClick={(e) => { e.preventDefault(); setShowPassword(!showPassword) }}>
+                                        <button type="button" className='absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer opacity-75 bg-gray-600 rounded-lg p-1.5 outline-none' onClick={(e) => { e.preventDefault(); setShowPassword(!showPassword) }}>
                                             <div className="relative w-5 h-5 flex items-center justify-center">
                                                 <LuEye className={`absolute transition-all duration-300 ease-in-out text-white ${showPassword ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-0'}`} />
                                                 <LuEyeClosed className={`absolute transition-all duration-300 ease-in-out text-white ${showPassword ? 'opacity-0 rotate-90 scale-0' : 'opacity-100 rotate-0 scale-100'}`} />
@@ -70,7 +68,7 @@ function Auth() {
                                         Forget your password?
                                     </span>
                                 </a> */}
-                                <button className="bg-gradient-to-r dark:text-gray-600 from-emerald-500 to-purple-400 shadow-lg mt-6 p-2 text-white rounded-lg w-full hover:scale-105 hover:from-purple-400 hover:to-emerald-500 transition duration-300 ease-in-out" type="submit" onClick={handleSubmit}>LOG IN</button>
+                                <button className="bg-gradient-to-r dark:text-gray-600 from-emerald-500 to-purple-400 shadow-lg mt-6 p-2 text-white rounded-lg w-full hover:scale-105 hover:from-purple-400 hover:to-emerald-500 transition duration-300 ease-in-out" type="submit">LOG IN</button>
                             </form>
                             {/* <div className="flex flex-col mt-4 items-center justify-center text-sm">
                                 <h3 className="dark:text-gray-300">

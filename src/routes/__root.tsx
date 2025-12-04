@@ -2,7 +2,19 @@ import { createRootRoute, redirect, Outlet } from '@tanstack/react-router'
 
 export const Route = createRootRoute({
     beforeLoad: ({ location }) => {
-        const isAuthenticated = !!sessionStorage.getItem('auth')
+        // Parse Zustand persist data from sessionStorage
+        const authData = sessionStorage.getItem('auth')
+        let isAuthenticated = false
+
+        if (authData) {
+            try {
+                const parsed = JSON.parse(authData)
+                isAuthenticated = parsed.state?.isAuthenticated || false
+            } catch (e) {
+                // If parsing fails, treat as not authenticated
+                isAuthenticated = false
+            }
+        }
 
         // 1. Redirect root path to appropriate page based on auth status
         if (location.pathname === '' || location.pathname === '/') {
