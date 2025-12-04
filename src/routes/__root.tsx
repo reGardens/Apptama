@@ -4,8 +4,16 @@ export const Route = createRootRoute({
     beforeLoad: ({ location }) => {
         const isAuthenticated = !!sessionStorage.getItem('auth')
 
-        // 1. Pages that CANNOT be accessed if ALREADY LOGGED IN
-        const authPaths = ['', '/', '/login', '/register', '/forgot-password']
+        // 1. Redirect root path to appropriate page based on auth status
+        if (location.pathname === '' || location.pathname === '/') {
+            throw redirect({
+                to: isAuthenticated ? '/note' : '/login',
+                replace: true,
+            })
+        }
+
+        // 2. Pages that CANNOT be accessed if ALREADY LOGGED IN
+        const authPaths = ['/login', '/register', '/forgot-password']
         if (isAuthenticated && authPaths.includes(location.pathname)) {
             throw redirect({
                 to: '/note',
@@ -13,7 +21,7 @@ export const Route = createRootRoute({
             })
         }
 
-        // 2. Protected Pages — only accessible if LOGGED IN
+        // 3. Protected Pages — only accessible if LOGGED IN
         const protectedPaths = ['/note', '/profile', '/settings', '/dashboard']
         const isProtectedPath = protectedPaths.some(path =>
             location.pathname.startsWith(path)
