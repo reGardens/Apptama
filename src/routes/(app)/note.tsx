@@ -1,3 +1,4 @@
+import LayoutBody from '@/components/layout/LayoutMain'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/(app)/note')({
@@ -5,5 +6,11 @@ export const Route = createFileRoute('/(app)/note')({
 })
 
 function RouteComponent() {
-  return <div>Hello "/note"!</div>
+  return (
+    <LayoutBody>
+      <div>
+
+      </div>
+    </LayoutBody>
+  )
 }

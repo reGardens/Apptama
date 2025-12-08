@@ -1,3 +1,4 @@
+import LayoutBody from '@/components/layout/LayoutMain';
 import packageJson from '../../../package.json'
 import { useAuthStore } from '@/stores/useAuthStore';
 import { createFileRoute, useRouter } from '@tanstack/react-router'
@@ -35,8 +36,8 @@ function Auth() {
     }
 
     return (
-        <div className="flex font-poppins items-center justify-center" >
-            <div className="h-screen w-screen flex justify-center items-center dark:bg-gray-900">
+        <LayoutBody>
+            <div className="flex justify-center items-center h-screen">
                 <div className="grid gap-8">
                     <div id="back-div" className="bg-gradient-to-r from-emerald-500 to-purple-400 rounded-[26px] m-4">
                         <div className="border-[20px] border-transparent rounded-[20px] dark:bg-gray-900 bg-white shadow-lg xl:p-10 2xl:p-10 lg:p-10 md:p-10 sm:p-2 m-2 py-8">
@@ -120,6 +121,7 @@ function Auth() {
                     <div className="text-center text-xs">v{packageJson.version}</div>
                 </div>
             </div>
-        </div>
+        </LayoutBody>
+
     )
 }
